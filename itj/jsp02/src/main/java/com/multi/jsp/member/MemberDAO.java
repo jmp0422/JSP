@@ -51,8 +51,8 @@ public class MemberDAO { // member테이블에 crud를 하고 싶으면 MemberDA
 				MemberDTO bag = new MemberDTO();
 				bag.setId(rs.getString("id")); //apple
 				bag.setPw(rs.getString("pw"));
-				bag.setName(rs.getString(3)); //db와 관련된 인덱스 1부터 시작 
-				bag.setTel(rs.getString(4));
+				bag.setName(rs.getString("name")); //db와 관련된 인덱스 1부터 시작
+				bag.setTel(rs.getString("tel"));
 				list.add(bag);
 			} 
 			

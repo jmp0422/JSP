@@ -77,7 +77,7 @@ jsp에서 해야하는 작업 3가지
        <td class="data"><%= result.getId() %></td>
        <td class="data"><%= result.getPw() %></td>
        <td class="data"><%= result.getName() %></td>
-       <td class="data"><%= result.getTel()%></td>
+       <td class="data"><%= result.getTel() %></td>
     </tr>
 
 </table>
