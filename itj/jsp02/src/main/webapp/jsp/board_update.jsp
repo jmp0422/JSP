@@ -12,8 +12,8 @@ jsp에서 해야하는 작업 3가지
          -->
 
     <%
-    String title = request.getParameter("id");
-    String content = request.getParameter("tel");
+    String title = request.getParameter("title");
+    String content = request.getParameter("content");
     int no = Integer.parseInt(request.getParameter("no"));
 
     BbsDAO dao = new BbsDAO();
@@ -39,8 +39,9 @@ jsp에서 해야하는 작업 3가지
     <%= resultText %>
     <h5>당신이 입력한 게시글정보를 확인해주세요.</h5>
     <hr color="green">
-    수정된 제목은 <%= title %> <br> <!-- id변수에 있는 것 보여줘(프린트) -->
-    수정한 전화번호는 <%= tel %> <br>
+    수정된 제목은 <%= title %> <br>
+    수정된 내용은 <%= content %> <br>
+    게시글번호는  <%= no %> <br>
 
 
 

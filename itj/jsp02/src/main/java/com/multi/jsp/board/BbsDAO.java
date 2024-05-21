@@ -6,6 +6,7 @@ import com.multi.jsp.common.DBConnectionMgr;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 public class BbsDAO { // member테이블에 crud를 하고 싶으면 MemberDAO를 사용하면 됨.!
@@ -143,5 +144,39 @@ public class BbsDAO { // member테이블에 crud를 하고 싶으면 MemberDAO�
 		}
 		return result;
 	} // update
+
+	public ArrayList<BbsDTO> list() {
+//		int result = 0;
+		ArrayList<BbsDTO> list = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from board";
+			ps = con.prepareStatement(sql); //
+			System.out.println("3. sql문 생성 성공!!");
+
+			rs = ps.executeQuery(); // 테이블로 mysql로 받아온다.
+			System.out.println("4. SQL문 mySQL로 전송 성공!!");
+			while(rs.next()) { // table안에 검색결과인 row가 있는지 체크
+				//1. 가방을 만들자.
+				//2. table에서 한행씩 꺼내서 가방에 넣자.
+				//3. 데이터가 들어있는 가방을 list에 넣자.
+				BbsDTO bag = new BbsDTO();
+				bag.setNo(rs.getInt("NO")); //apple
+				bag.setTitle(rs.getString("TITLE"));
+				bag.setContent(rs.getString("CONTENT")); //db와 관련된 인덱스 1부터 시작
+				bag.setWriter(rs.getString("WRITER"));
+				list.add(bag);
+			}
+
+		} catch (Exception e) { // Exception == Error
+			e.printStackTrace();// 에러정보를 추적해서 프린트해줘.!
+			System.out.println("에러발생함.!!!!");
+		}finally {
+			dbcp.freeConnection(con, ps, rs);//반납
+		}
+
+		return list;
+	} // list
 
 } // class

@@ -74,6 +74,16 @@
          <button>서버로 제출</button>
     </form>
 
+     <br><br>
+       <h2 align="center">5.회원가입 화면 jsp</h2>
+        <a href="member.html">회원가입화면연결</a>
+
+        <br><br>
+    <h2 align="center">6.MVC1 -> MVC2 로 변경 연습 </h2>
+
+    <!-- MVC1 , MVC2 로 변경 연습  -->
+       <a href="member2.html">회원가입form -> servlet -> 결과 form 연습 </a>
+
 
 </body>
 </html>
