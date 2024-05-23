@@ -1,0 +1,13 @@
+window - preferences - general - editors - text editors - spelling - utf8
+workspace - utf8
+web - css,html,jsp - utf 8
+server - runtime environments 
+add - apache - v9.0 - finish
+
+window - web browser - chrome
+
+가운데아래 - servers - apache - tomcat 9.0v
+
+servers 따로빼고 더블클릭 - http포트번호 바꾸기
+서버옵션 맨위에꺼 체크
+저장
