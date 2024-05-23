@@ -1,4 +1,4 @@
-package com.uni.shop.board.model.dto;
+package com.multi.shop.board.model.dto;
 
 public class CategoryDTO implements java.io.Serializable {
 	

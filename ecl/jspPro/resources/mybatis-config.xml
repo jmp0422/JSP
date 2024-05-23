@@ -11,6 +11,22 @@
 	<settings>
 		<setting name= "jdbcTypeForNull" value="NULL"/>
 	</settings>
+	
+    <typeAliases>
+    <typeAlias type="com.multi.shop.board.model.dto.BoardDTO" alias="Board"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </typeAliases>
 
 
 	<!-- DB연결할 설정에 대한 정보를 선언하는 영역  
@@ -50,7 +66,9 @@
 
 		</environment>
 	</environments>
-
+	<mappers>
+		<mapper resource= "/mappers/board-mapper.xml"/>
+	</mappers>
 
 
 </configuration>
