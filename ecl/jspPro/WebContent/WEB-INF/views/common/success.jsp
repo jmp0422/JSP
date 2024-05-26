@@ -39,6 +39,14 @@
 					successMessage = "제품등록에 성공하셨습니다!";
 					movePath = "${ pageContext.servletContext.contextPath }/product/list";
 					break;
+				case "updateBoard" : 
+					successMessage = "게시글 수정에 성공하셨습니다!";
+					movePath = "${ pageContext.servletContext.contextPath }/board/list";
+					break;
+				case "deleteBoard" : 
+					successMessage = "게시글 삭제에 성공하셨습니다!";
+					movePath = "${ pageContext.servletContext.contextPath }/board/list";
+					break;
 			}
 
 			alert(successMessage);

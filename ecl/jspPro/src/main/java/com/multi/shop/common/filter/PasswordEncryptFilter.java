@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-import com.uni.shop.common.wrapper.EncryptRequestWrapper;
+import com.multi.shop.common.wrapper.EncryptRequestWrapper;
 
 
 /* member 서비스인 경우에만 암호화 처리 할 수 있도록 한다. */

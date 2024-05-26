@@ -18,7 +18,8 @@ import com.multi.shop.member.service.MemberServiceImpl;
 @WebServlet("/member/insert")
 public class MemberRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private MemberService memberService = new MemberServiceImpl();   
+	private MemberService memberService = new MemberServiceImpl();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -26,11 +27,11 @@ public class MemberRegistServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String path = "/WEB-INF/views/member/insert.jsp";
 
 		request.getRequestDispatcher(path).forward(request, response);
@@ -40,31 +41,26 @@ public class MemberRegistServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//받아오기
-		request.setCharacterEncoding("UTF-8");
-		MemberDTO requestMember = new MemberDTO();
+		// TODO Auto-generated method stub
 		
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String name = request.getParameter("name");
-		String tel = request.getParameter("tel");
-		//dto에담기
+        String pw = request.getParameter("pw");
+        String name = request.getParameter("name");
+        String tel = request.getParameter("tel");
+
+        MemberDTO member = new MemberDTO();
+        member.setId(id);
+        member.setPw(pw);
+        member.setName(name);
+        member.setTel(tel);
+
+        System.out.println("memberController requestMember : " + member);
 		
-		requestMember.setId(id);
-		requestMember.setPw(pw);
-		requestMember.setName(name);
-		requestMember.setTel(tel);
-		
-		//출력하기
-		System.out.println("memberController requestMember : " + requestMember);
 		String page = "";
 		try {
-			int result = memberService.insertMember(requestMember);
+			int result = memberService.insertMember(member);
 			
-			System.out.println("memberController result : " + result);
-
-			
+			System.out.println("memberController result : " + result);	
 
 			if (result > 0) {
 
@@ -86,4 +82,5 @@ public class MemberRegistServlet extends HttpServlet {
 		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
+
 }

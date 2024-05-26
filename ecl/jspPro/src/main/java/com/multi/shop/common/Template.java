@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class Template {
-
 	public static SqlSession getSqlSession() {
 		SqlSession sqlSession = null;
 		
@@ -23,5 +22,4 @@ public class Template {
 		
 		return sqlSession;
 	}
-	
 }

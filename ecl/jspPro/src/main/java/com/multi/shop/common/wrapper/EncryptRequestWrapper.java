@@ -17,7 +17,7 @@ public class EncryptRequestWrapper extends HttpServletRequestWrapper {
 		System.out.println("getParameter : "+ key);
 		String value = "";
 		if("pw".equals(key)) {
-//		스프링 시큐리티중 BCrypt 암호화를 제공해주는 라이브러리를 추가한 후 암호화 처리
+		// 스프링 시큐리티중 BCrypt 암호화를 제공해주는 라이브러리를 추가한 후 암호화 처리
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			value = passwordEncoder.encode(super.getParameter(key)); //encode 메소드는 비밀번호에 솔트를 자동으로 추가하고, 결과적으로 생성된 해시 값을 반환
 			System.out.println(value);

@@ -13,7 +13,6 @@ import com.multi.shop.board.model.dto.BoardDTO;
 import com.multi.shop.board.service.BoardService;
 import com.multi.shop.board.service.BoardServiceImpl;
 import com.multi.shop.member.model.dto.MemberDTO;
-import com.mysql.cj.Session;
 
 /**
  * Servlet implementation class BoardInsertServlet
@@ -23,65 +22,69 @@ public class BoardInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardServiceImpl();
        
-
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public BoardInsertServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = "";
-		path = "/WEB-INF/views/board/insertform.jsp";
-		
+		// TODO Auto-generated method stub
+		String path = "/WEB-INF/views/board/insertform.jsp";
+
 		request.getRequestDispatcher(path).forward(request, response);
 	}
 
-
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String page = "";
-		BoardDTO newBoard = new BoardDTO();
-		HttpSession session = request.getSession();
+		// TODO Auto-generated method stub
 		
-		int category = Integer.parseInt(request.getParameter("category"));
+		String category = request.getParameter("category");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		String writer = ((MemberDTO) request.getSession().getAttribute("loginMember")).getId();
 		
+		BoardDTO board = new BoardDTO();
 		
-		MemberDTO member = (MemberDTO) session.getAttribute("loginMember");
+		board.setCategoryCode(Integer.parseInt(category));
+		board.setTitle(title);
+		board.setContent(content);
+		board.setWriter(writer);
 		
+		System.out.println("doPost. boardDTO : " + board);
 		
-		System.out.println("작성자는  "+member.getName());
-		
-		newBoard.setCategoryCode(category);
-		newBoard.setTitle(title);
-		newBoard.setContent(content);
-		newBoard.setWriter(member.getName());
-		
-		System.out.println("BoardInsert : " + newBoard);
+		int result;
+		String path = "";
 		
 		try {
-			int result = boardService.insertBoard(newBoard);
-			
+			result = boardService.insertBoard(board);
 			if (result > 0) {
 
-				page = "/WEB-INF/views/common/success.jsp";
+				path = "/WEB-INF/views/common/success.jsp";
 
 				request.setAttribute("successCode", "insertBoard");
 
 			} else {
 
-				page = "/WEB-INF/views/common/failed.jsp";
+				path = "/WEB-INF/views/common/failed.jsp";
 
-				request.setAttribute("message", "게시글 생성 실패!");
+				request.setAttribute("message", "게시글 작성 실패!");
 			}
 		} catch (Exception e) {
-			page = "/WEB-INF/views/common/failed.jsp";
+			path = "/WEB-INF/views/common/failed.jsp";
 
-			request.setAttribute("message", "게시글 생성 실패!");
+			request.setAttribute("message", "게시글 작성 실패!");
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
-
+		request.getRequestDispatcher(path).forward(request, response);
+		
 	}
 
 }

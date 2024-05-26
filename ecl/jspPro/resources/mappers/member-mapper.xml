@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
+	
+	<resultMap type="Member" id="memberResultMap">
+		<!-- 언더바가 들어가는 쿼리문에 한하여 매핑을 해줘야함 -->
+		<id property="no" column="NO"/>
+		<result property="id" column="ID"/>
+		<result property="pw" column="PW"/>
+		<result property="name" column="NAME"/>
+		<result property="tel" column="TEL"/>
+		<result property="createDate" column="CREATE_DATE"/>
+	</resultMap>
 
-
-
-	<insert id="insertBoard">
-        INSERT /* com.uni.shop.board.model.dao.BoardDAO.insertBoard() */
-          INTO Member 
-        (
-          id
-        , pw
-        , name
-        , tel
-        )
-        VALUES
-        (
-    
-          #{ id }
-        , #{ pw }
-        , #{ name }
-        , #{ tel }
-        )
+	<insert id="insertMember" parameterType="Member">
+        INSERT INTO MEMBER ( ID, PW, NAME, TEL )
+        VALUES( #{ id }, #{ pw }, #{ name }, #{ tel } )
 	</insert>
+	
+	<select id="selectEncryptedPwd" parameterType="Member" resultType="java.lang.String">
+		SELECT PW
+		FROM MEMBER
+		WHERE ID = #{ id }
+	</select>
+	
+	<select id="selectLoginMember" parameterType="Member" resultMap="memberResultMap">
+		SELECT *
+		FROM MEMBER
+		WHERE ID = #{ id }
+	</select>
+
+</mapper>

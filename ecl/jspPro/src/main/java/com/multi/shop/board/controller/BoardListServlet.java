@@ -16,10 +16,11 @@ import com.multi.shop.board.service.BoardServiceImpl;
 /**
  * Servlet implementation class BoardListServlet
  */
-@WebServlet("/board/list")
+@WebServlet(asyncSupported = true, urlPatterns = { "/board/list" })
 public class BoardListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardServiceImpl();
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,24 +33,25 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
-		 String path = "";
-		 		try {
+		// TODO Auto-generated method stub
+		
+		String path = "";
+		
+		try {
 
-		 				ArrayList<BoardDTO> list = boardService.selectList();
-		 				request.setAttribute("list", list);
-		 				System.out.println(list);
-		 				path = "/WEB-INF/views/board/board_list.jsp";
-		 			
-		 			
-		 		} catch (Exception e) {
-		 			// TODO Auto-generated catch block
-		 			e.printStackTrace();
-		 			path = "/WEB-INF/views/common/errorPage.jsp";
-		 			request.setAttribute("msg", "게시물 목록 조회 실패!");
-		 		}
-		 		request.getRequestDispatcher(path).forward(request, response);
-		 		response.getWriter().append("Served at: ").append(request.getContextPath());
+			ArrayList<BoardDTO> list = boardService.selectList();
+			request.setAttribute("list", list);
+			System.out.println(list);
+			path = "/WEB-INF/views/board/board_list.jsp";
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			path = "/WEB-INF/views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시물 목록 조회 실패!");
+		}
+		request.getRequestDispatcher(path).forward(request, response);
 	}
 
 	/**

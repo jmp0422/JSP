@@ -37,4 +37,14 @@ public class BoardDAO {
 		
 		return session.insert("boardMapper.insertBoard", newBoard);
 	}
+	
+	public int updateBoard(SqlSession session, BoardDTO board) {
+		
+        return session.update("boardMapper.updateBoard", board);
+    }
+
+	public int deleteBoard(SqlSession session, int bno) {
+		// TODO Auto-generated method stub
+		return session.update("boardMapper.deleteBoard", bno);
+	}
 }

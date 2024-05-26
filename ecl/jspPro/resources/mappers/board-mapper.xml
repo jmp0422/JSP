@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
 	<resultMap type="Board" id="boardResultSet">
@@ -12,8 +11,7 @@
 			<result property="createDate" column="CREATED_DATE"/>
 			<result property="status" column="STATUS"/>
 			<result property="writer" column="WRITER"/>
-
-		</resultMap>
+	</resultMap>
 	
 	<resultMap type="com.multi.shop.board.model.dto.CategoryDTO" id="categoryResultMap">
 		<id property="code" column="C_CODE"/>
@@ -46,22 +44,19 @@
 	</update>
 	
 	<insert id="insertBoard">
-        INSERT /* com.uni.shop.board.model.dao.BoardDAO.insertBoard() */
-          INTO BOARD 
-        (
-          CATEGORY_CODE
-        , TITLE
-        , CONTENT
-        , WRITER
-        )
-        VALUES
-        (
-    
-          #{ categoryCode }
-        , #{ title }
-        , #{ content }
-        , #{ writer }
-        )
+        INSERT INTO BOARD ( CATEGORY_CODE, TITLE, CONTENT, WRITER )
+        VALUES ( #{ categoryCode }, #{ title }, #{ content }, #{ writer } )
 	</insert>
+	
+	<update id="updateBoard">
+        UPDATE BOARD
+        SET CATEGORY_CODE = #{ categoryCode }, TITLE = #{ title }, CONTENT = #{ content }
+        WHERE NO = #{ no } AND WRITER = #{ writer }
+    </update>
+    
+    <delete id="deleteBoard" parameterType="_int">
+   		DELETE FROM BOARD
+    	WHERE NO = #{ no }
+	</delete>
 
 </mapper>

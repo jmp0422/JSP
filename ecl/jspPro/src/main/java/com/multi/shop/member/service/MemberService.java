@@ -2,11 +2,10 @@ package com.multi.shop.member.service;
 
 import com.multi.shop.member.model.dto.MemberDTO;
 
-public class MemberService {
+public interface MemberService {
 
-	public void insertMember(MemberDTO requestMember)throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	int insertMember(MemberDTO newMember) throws Exception ;
 
+	MemberDTO loginCheck(MemberDTO member) throws Exception ;
+	
 }

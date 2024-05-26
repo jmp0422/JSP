@@ -49,7 +49,7 @@
 						<td colspan="3" align="center">
 						<!-- https://join.shopping.naver.com/intro/effect.nhn 이렇게 확장자 쓰기도함. 하단 네이버 비지니스 -->
 							<!-- <a href="WEB-INF/views/member/memberEnrollForm.jsp">회원가입</a> 이제부터는 바로 페이지 요청 불가.. -->
-							<a href="${ pageContext.servletContext.contextPath}/member/insert"  >회원가입 </a> 
+							<a href="${ pageContext.servletContext.contextPath}/member/insert">회원가입 </a> 
 							<a href="" > 아이디/비번 찾기 </a>
 						</td>
 					</tr>
@@ -73,11 +73,11 @@
 	</div>
 	<!-- ------------------------- 2. 게시물 관련 서비스 ---------------------- -->
 	<div class="nav-area" align="center">
-		<div class="menu" onclick="location.href='${pageContext.servletContext.contextPath }';">HOME</div>
+		<div class="menu" onclick="location.href='${ pageContext.servletContext.contextPath }';">HOME</div>
 		<div class="menu">공지사항</div>
-		<div class="menu" onclick="location.href='${pageContext.servletContext.contextPath }/board/list';">게시판</div>
-		<div class="menu" onclick="location.href='${pageContext.servletContext.contextPath }/product/list';">제품</div>
-		<div class="menu" onclick="location.href='${pageContext.servletContext.contextPath }/product/basket';">장바구니</div>
+		<div class="menu" onclick="location.href='${ pageContext.servletContext.contextPath }/board/list';">게시판</div>
+		<div class="menu" onclick="location.href='${ pageContext.servletContext.contextPath }/product/list';">제품</div>
+		<div class="menu" onclick="location.href='${ pageContext.servletContext.contextPath }/product/basket';">장바구니</div>
 	</div>
 </body>
 </html>

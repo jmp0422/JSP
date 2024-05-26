@@ -3,33 +3,23 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 
 
+
 <!-- 마이바티스 설정과 관련하여 기본셋팅들을 선언할수 있는 영역 -->
 <configuration>
-
 
 <!-- null 데이터가 전달되었다면 빈칸이아닌 null 로 인식하라는 뜻 , 주의 : value에 null 은 반드시 대문자로 !!-->
 	<settings>
 		<setting name= "jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
-    <typeAliases>
-    <typeAlias type="com.multi.shop.board.model.dto.BoardDTO" alias="Board"/>
-    <typeAlias type="com.multi.shop.member.model.dto.MemberDTO" alias="Member"/>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </typeAliases>
-
-
+	
+	
+	
+	<typeAliases>
+		<typeAlias type="com.multi.shop.board.model.dto.BoardDTO" alias="Board"/>
+		<typeAlias type="com.multi.shop.member.model.dto.MemberDTO" alias="Member"/>
+	</typeAliases>
+	
 	<!-- DB연결할 설정에 대한 정보를 선언하는 영역  
 		default : 연결설정을 여러 개 생성할수 있고 아이디로 구분 하는데  기본으로 연결할 설정정보를 가리키는 속성-->
 	<environments default="development">
@@ -45,17 +35,8 @@
 				- MANAGED : 트랜잭션에 대해 어떠한 영향도 행사하지 않는다는 옵션(자동 commit)
 							컨테이너가 트랜잭션의 모든 생명주기를 관리한다. 디폴트로 커넥션을 닫아줌
 			 -->
-
-		      	<transactionManager type="JDBC"/>
-			  <dataSource type="POOLED"> <!-- 한번 등록 해놓으면 캐쉬로 등록해서 다음번에도 계속 적용 -->
-		      <!--  <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-		        <property name="url" value="jdbc:mysql://localhost:3306/scott"/> -->
-		        <property name="driver" value="net.sf.log4jdbc.DriverSpy"/>
-				<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/scott?characterEncoding=utf8"/>
-		        <property name="username" value="scott"/>
-		        <property name="password" value="scott"/>
-		        
-		        	<!--<transactionManager type="JDBC"/>
+			 
+			 <!--<transactionManager type="JDBC"/>
 			  <dataSource type="POOLED">  한번 등록 해놓으면 캐쉬로 등록해서 다음번에도 계속 적용 -->
 		     <!--   <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
 		        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
@@ -63,16 +44,23 @@
 		        <property name="password" value="mybatis"/>
 		      </dataSource>
 		       -->
-		       
+
+		      	<transactionManager type="JDBC"/>
+			  <dataSource type="POOLED"> <!-- 한번 등록 해놓으면 캐쉬로 등록해서 다음번에도 계속 적용 -->
+		        <!-- <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+		        <property name="url" value="jdbc:mysql://localhost:3306/scott"/> -->
+		        <!-- 위는 기본적인 MySQL 연결 / 아래는 콘솔에 로그를 찍는 log4j와 MySQL 연결 -->
+		        <property name="driver" value="net.sf.log4jdbc.DriverSpy"/>
+				<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/scott"/>
+		        <property name="username" value="scott"/>
+		        <property name="password" value="scott"/>
 		      </dataSource>
-		      
 
 		</environment>
 	</environments>
+
 	<mappers>
-		<mapper resource= "/mappers/board-mapper.xml"/>
-		<mapper resource= "/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/member-mapper.xml"/>
 	</mappers>
-
-
 </configuration>
