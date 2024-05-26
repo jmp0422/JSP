@@ -14,6 +14,7 @@
 	
     <typeAliases>
     <typeAlias type="com.multi.shop.board.model.dto.BoardDTO" alias="Board"/>
+    <typeAlias type="com.multi.shop.member.model.dto.MemberDTO" alias="Member"/>
     
     
     
@@ -47,8 +48,10 @@
 
 		      	<transactionManager type="JDBC"/>
 			  <dataSource type="POOLED"> <!-- 한번 등록 해놓으면 캐쉬로 등록해서 다음번에도 계속 적용 -->
-		        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-		        <property name="url" value="jdbc:mysql://localhost:3306/scott"/>
+		      <!--  <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+		        <property name="url" value="jdbc:mysql://localhost:3306/scott"/> -->
+		        <property name="driver" value="net.sf.log4jdbc.DriverSpy"/>
+				<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/scott?characterEncoding=utf8"/>
 		        <property name="username" value="scott"/>
 		        <property name="password" value="scott"/>
 		        
@@ -68,6 +71,7 @@
 	</environments>
 	<mappers>
 		<mapper resource= "/mappers/board-mapper.xml"/>
+		<mapper resource= "/mappers/member-mapper.xml"/>
 	</mappers>
 
 
