@@ -18,6 +18,7 @@
 	<typeAliases>
 		<typeAlias type="com.multi.shop.board.model.dto.BoardDTO" alias="Board"/>
 		<typeAlias type="com.multi.shop.member.model.dto.MemberDTO" alias="Member"/>
+		<typeAlias type="com.multi.shop.product.model.dto.ProductDTO" alias="Product"/>
 	</typeAliases>
 	
 	<!-- DB연결할 설정에 대한 정보를 선언하는 영역  
@@ -62,5 +63,6 @@
 	<mappers>
 		<mapper resource="/mappers/board-mapper.xml"/>
 		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/product-mapper.xml"/>
 	</mappers>
 </configuration>

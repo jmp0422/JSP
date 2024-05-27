@@ -27,11 +27,13 @@
 	            </tr>
 	        </c:if>
 	
-	        <c:forEach var="b" items="${list}">
+	        <c:forEach var="b" items="${list}"> 
+	        <!-- forEach문을 사용해서 list에있는 정보들이 전부들어갈떄까지 반복해서 b에 정보를 담는다 -->
 	            <tr>
 	                <td class="text-center tdc"><c:out value="${b.no}" /></td>
 	                <td class="text-center tdc">
 	                    <a href="${pageContext.servletContext.contextPath}/board/selectone?no=${b.no}" class="text-decoration-none">
+	                    <!-- 해당개실물을 클릭하면 selectone으로 이동하여 상세정보확인 -->
 	                        <c:out value="${b.title}" />
 	                    </a>
 	                </td>
@@ -46,10 +48,11 @@
 	<c:if test="${ !empty sessionScope.loginMember }">
 	 <div align="center">
         <button class="btns" id="writeBoard" onclick="location.href='${pageContext.servletContext.contextPath}/board/insert'">작성하기</button>
+        <!-- 작성하기 버튼 생성 후 버튼클릭시 게시글작성 insert로 넘어감 -->
     </div>
 	</c:if>
 	<script>
-		
+		/* 마우스올리면 색상변하고, 클릭시 상세페이지로 이동하는 스크립트코드 */
 	if(document.getElementsByClassName("tdc")) {
 	    const $tds = document.getElementsByClassName("tdc");
 	    for(let i = 0; i < $tds.length; i++) {

@@ -53,6 +53,7 @@
 		<button class="btn btn-secondary" onclick="submitDeleteForm()">삭제하기</button>
 
 		<script>
+		/* 삭제클릭시 실행되는 매서드 */
 		    function submitDeleteForm() {
 		        if (confirm("정말로 삭제하시겠습니까?")) {
 		            document.getElementById("deleteForm").submit();

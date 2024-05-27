@@ -12,7 +12,7 @@
   
   <filter>
     <filter-name>encoding</filter-name>
-    <filter-class>com.multi.shop.common.filter.EncodingFilter</filter-class>
+    <filter-class>com.multi.shop.common.filter.EncodingFilter</filter-class> <!-- 필터구현 -->
     <init-param>
       <param-name>encoding-type</param-name>
       <param-value>UTF-8</param-value>

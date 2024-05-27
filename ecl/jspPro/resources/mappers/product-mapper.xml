@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="productMapper">
+	<resultMap type="Product" id="productResultSet">
+			<!-- 언더바가 들어가는 쿼리문에 한하여 매핑을 해줘야함 -->
+			<!-- property : 자바에서 필드변수이름, column : db의 해당컬럼명 -->
+			<!-- db에서의 기본키 -->		
+	
+			<!-- 1-1. resultMap의 하위 엘리먼트 -->
+			<!-- 
+				<id> : primary key 컬럼을 매핑하기 위한 태그이다. (성능 향상)
+				<result> : pk가 아닌 일반 컬럼에 매핑하기 위한 태그이다.
+				<constructor> : 인스턴스화 되는 클래스의 생성자에 결과를 삽입하기 위해 사용한다. <idArg>, <arg> 하위 엘리먼트가 있다.
+				<association> : 복잡한 타입의 연관관계로 1:1 포함관계인 경우 사용한다.
+				<collection> : 복잡한 타입의 연관관계로 1:다 포함관계인 경우 사용한다.
+				<discriminator> : 조건에 따라 다른 resultMap이 매핑되도록 한다. 잘사용하지않음
+			-->
+			
+			
+			    <id property="id" column="ID"/>
+			    <result property="name" column="NAME"/>
+			    <result property="content" column="CONTENT"/>
+			    <result property="price" column="PRICE"/>
+			    <result property="img" column="IMG"/>
+			    <result property="status" column="STATUS"/>
+			    <result property="createDate" column="CREATED_DATE"/>
+			    <result property="createPerson" column="CREATED_PERSON"/>
+			    <result property="modifyDate" column="MODIFIED_DATE"/>
+			    <result property="modifyPerson" column="MODIFIED_PERSON"/>
+			    
+			    <association property="company" resultMap="companyResultSet"/>
+			    <collection property="attachments" resultMap="attachmentResultMap"/>
+			     
+	</resultMap>
+
+	  
+	<resultMap type="com.multi.shop.product.model.dto.CompanyDTO" id="companyResultSet">
+			<id property="id" column="ID"/>
+			<result property="name" column="COMPANYNAME"/>
+			<result property="addr" column="ADDR"/>
+			<result property="tel" column="TEL"/>
+	</resultMap>
+	
+	<resultMap id="attachmentResultMap" type="com.multi.shop.product.model.dto.AttachmentDTO">
+		    <id property="no" column="ATTACHMENT_NO"/>
+		    <result property="refProductNo" column="REF_PRODUCT_NO"/>
+		    <result property="originalName" column="ORIGINAL_NAME"/>
+		    <result property="savedName" column="SAVED_NAME"/>
+		    <result property="savePath" column="SAVE_PATH"/>
+		    <result property="thumbnailPath" column="THUMBNAIL_PATH"/>
+		    <result property="createDate" column="CREATE_DATE"/>
+		    <result property="createPerson" column="CREATE_PERSON"/>
+		    <result property="modifyDate" column="MODIFY_DATE"/>
+		    <result property="modifyPerson" column="MODIFY_PERSON"/>
+	</resultMap>
+ 
+	<select id="selectList" resultMap="productResultSet">
+		SELECT A.*,B.NAME COMPANYNAME /*B.NAME 같아서 주의  COMPANYNAME*/
+		FROM PRODUCT A
+		JOIN  COMPANY B ON A.COMPANY_ID = B.ID
+		
+		ORDER BY A.ID DESC
+	</select>
+	
+	<select id="selectProduct" parameterType="_int" resultMap="productResultSet">
+		  SELECT /*B.NAME 같아서 주의  COMPANYNAME*/
+               A.ID
+             , A.NAME
+             , A.CONTENT
+             , A.PRICE
+             , A.COMPANY_ID
+             , A.CREATED_DATE
+             , A.CREATED_PERSON
+             , B.NAME COMPANYNAME
+             , B.TEL
+             , C.ORIGINAL_NAME
+             , C.SAVED_NAME
+             , C.SAVE_PATH
+             , C.THUMBNAIL_PATH
+          FROM PRODUCT A
+          JOIN COMPANY B ON A.COMPANY_ID = B.ID
+          LEFT JOIN ATTACHMENT C ON (A.ID = C.REF_PRODUCT_NO)
+         WHERE A.STATUS = 'Y'
+           AND A.ID = #{ pid }
+	
+	</select>
+	
+	<select id="selectCompanyList" resultMap="companyResultSet">
+		SELECT A.ID , A.NAME COMPANYNAME , A.ADDR , A.TEL  /*B.NAME 같아서 주의  COMPANYNAME*/
+		FROM COMPANY A
+		ORDER BY A.ID ASC
+	</select>
+	
+	<insert id="insertAttachment">
+        INSERT /**/
+          INTO ATTACHMENT 
+        (
+        
+       		REF_PRODUCT_NO
+        , ORIGINAL_NAME
+        , SAVED_NAME
+        , SAVE_PATH
+        , THUMBNAIL_PATH
+        , CREATED_PERSON
+        )
+        VALUES 
+        (
+         
+       #{ refProductNo }
+        , #{ originalName }
+        , #{ savedName }
+        , #{ savePath }
+        , #{ thumbnailPath }
+        , #{ createPerson}
+        )
+	</insert>
+	
+	<!--	insert 추가 속성
+		useGenerateKeys : 생성 키 값을 만들기 위해 JDBC의 getGenerateKeys메소드를 호출할지 결정하며 기본값은 false이다. mysql - autoincreament, oracle - sequence
+		keyProperty : insert 구문의 하위 엘리먼트인 selectKey 엘리먼트에 의한 반환값을 설정할 프로퍼티를 지정.
+		keyColumn : 생성 키를 가진 테이블의 컬럼명을 설정한다. (키 컬럼이 테이블의 첫 번째 행이 아닌 데이터베이스에서만 필요하다 - PostgreSQL 제외)
+	 -->
+	<insert id="insertProduct" useGeneratedKeys="true" keyProperty="id">
+        INSERT /* company.id  주의 ProductDTO 내에 있는 CompanyDTO의 id 필드에서 가져오는것*/
+          INTO PRODUCT
+        (
+          NAME
+        , CONTENT
+        , PRICE
+        , COMPANY_ID
+        , CREATED_PERSON
+        )
+        VALUES 
+        (
+          #{ name }
+        , #{ content }
+        , #{ price }
+        , #{ company.id }
+        , #{ createPerson }
+        )
+       
+	</insert>
+
+</mapper>

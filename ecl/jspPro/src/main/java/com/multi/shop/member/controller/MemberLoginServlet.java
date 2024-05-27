@@ -16,7 +16,7 @@ import com.multi.shop.member.service.MemberServiceImpl;
 /**
  * Servlet implementation class MemberLoginServlet
  */
-@WebServlet("/member/login")
+@WebServlet("/member/login") //로그인서블릿
 public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MemberService memberService = new MemberServiceImpl();
@@ -32,41 +32,43 @@ public class MemberLoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    //클라이언트의 post요청을 받아 로그인 처리를 수행
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// 파라메터방식으로 id,pw 가져오기
 		String id = request.getParameter("userId");
         String pw = request.getParameter("userPwd");
         
-        MemberDTO member = new MemberDTO();
+        MemberDTO member = new MemberDTO(); // memberdto 에 set하기
         member.setId(id);
         member.setPw(pw);
         
-        System.out.println("memberController requestMember : " + member);
+        System.out.println("memberController requestMember : " + member); //받아온 회원정보입력
         
         String page = "";
         
         try {
         	
-			MemberDTO loginMember = memberService.loginCheck(member);
+			MemberDTO loginMember = memberService.loginCheck(member); //로그인체크매서드 실행
 			
-			if (loginMember != null) {
-				
+			if (loginMember != null) { 
+				//로그인성공시 세션을 생성하고 로그인한 회원정보를 세션에 저장
 				HttpSession session = request.getSession();
 				
 				session.setAttribute("loginMember", loginMember);
 				
 				response.sendRedirect(request.getContextPath());
 				
-			} else {
+			} else { //로그인실패시
 				page = "/WEB-INF/views/common/failed.jsp";
 
-				request.setAttribute("message", "로그인 실패!");
+				request.setAttribute("message", "로그인 실패!"); //실패메세지 출력
 				
-				request.getRequestDispatcher(page).forward(request, response);
+				request.getRequestDispatcher(page).forward(request, response);  //page에설정된 실패페이지로 이동
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			// 예외발생시 실패메세지 출력 및 실패페이지 포워드
 			e.printStackTrace();
 			page = "/WEB-INF/views/common/failed.jsp";
 
