@@ -38,7 +38,7 @@ public class BoardUpdateServlet extends HttpServlet {
 
         String path = "";
         try {
-            // Get the board information based on the board number
+        	// 게시물 번호를 기반으로 게시물 정보를 가져옴
             BoardDTO board = boardService.selectBoard(no);
             request.setAttribute("b", board);
             path = "/WEB-INF/views/board/board_update.jsp";
@@ -55,19 +55,19 @@ public class BoardUpdateServlet extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Get the updated board information from the request parameters
+    	// 요청 매개변수에서 업데이트된 게시물 정보를 가져옴
         String noStr = request.getParameter("no");
         int no = Integer.parseInt(noStr);
         String category = request.getParameter("category");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
-        // Get the writer information from the session
+     // 세션에서 작성자 정보를 가져옴
         HttpSession session = request.getSession();
         MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
         String writer = loginMember.getId();
 
-        // Create a BoardDTO object with the updated information
+        // 업데이트된 정보로 BoardDTO 객체 생성
         BoardDTO board = new BoardDTO();
         board.setNo(no);
         board.setCategoryCode(Integer.parseInt(category));
@@ -81,7 +81,7 @@ public class BoardUpdateServlet extends HttpServlet {
         String path = "";
 
         try {
-            // Update the board information
+        	// 게시물 정보를 업데이트
             result = boardService.updateBoard(board);
             if (result > 0) {
                 path = "/WEB-INF/views/common/success.jsp";

@@ -62,6 +62,18 @@ public class ProductServiceImpl implements ProductService {
 		return result;
 		
 	}
+
+	@Override
+	public ProductDTO selectProduct2(int pid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProductDTO selectProduct(int productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

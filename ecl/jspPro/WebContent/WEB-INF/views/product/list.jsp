@@ -19,7 +19,8 @@
 <body>
 
 	   <jsp:include page="../common/menubar.jsp" />
-
+	<!-- 제품 검색 조건추가 -->
+	
     <!-- 제품 리스트 -->
     <div class="container mt-4">
         <table class="table table-hover table-bordered">

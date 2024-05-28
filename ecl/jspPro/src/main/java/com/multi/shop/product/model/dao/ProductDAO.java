@@ -34,5 +34,11 @@ public class ProductDAO {
 		return session.insert("productMapper.insertAttachment", attachmentDTO);
 		
 	}
+	
+	public ProductDTO selectProduct2(SqlSession session, int pid) {
+		  
+		return session.selectOne("productMapper.selectProduct2", pid);
+		
+	}
 
 }

@@ -13,4 +13,8 @@ public interface ProductService {
 
 	int insertProduct(ProductDTO newProduct) throws Exception;
 
+	ProductDTO selectProduct2(int pid)throws Exception ;
+
+	ProductDTO selectProduct(int productId);
+
 }
